@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+src/__init__.py
+src/kisz_time_series.egg-info/PKG-INFO
+src/kisz_time_series.egg-info/SOURCES.txt
+src/kisz_time_series.egg-info/dependency_links.txt
+src/kisz_time_series.egg-info/requires.txt
+src/kisz_time_series.egg-info/top_level.txt
+src/tscourse/__init__.py
+src/tscourse/config.py
+src/tscourse/data.py
+src/tscourse/plotting.py
+src/tscourse/utils.py

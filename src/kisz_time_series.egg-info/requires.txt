@@ -1,0 +1,9 @@
+ipykernel>=6.30.1
+matplotlib>=3.10.6
+missingno>=0.5.2
+pandas>=2.3.2
+pip>=25.2
+pyarrow>=21.0.0
+seaborn>=0.13.2
+setuptools>=80.9.0
+statsmodels>=0.14.5

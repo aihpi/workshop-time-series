@@ -77,6 +77,10 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
     - Data prep, feature engineering, baseline models, advanced models, evaluation.
     - Case study on a real dataset (e.g., electricity demand or M4 competition dataset).
 
+### Part F: Appendices
+1. Using the recommended datasets
+    - Code for quickly setting up the datasets used exemplary on this course.
+
 ---
 
 ## Documentation
