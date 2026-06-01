@@ -5,12 +5,15 @@ Summary: Code and resources for the OpenHPI course Time Series Analysis and Fore
 Requires-Python: >=3.13
 Description-Content-Type: text/markdown
 License-File: LICENSE
+Requires-Dist: huggingface-hub>=1.16.4
+Requires-Dist: iprogress>=0.4
 Requires-Dist: ipykernel>=6.30.1
 Requires-Dist: matplotlib>=3.10.6
 Requires-Dist: missingno>=0.5.2
 Requires-Dist: pandas>=2.3.2
 Requires-Dist: pip>=25.2
 Requires-Dist: pyarrow>=21.0.0
+Requires-Dist: scikit-learn>=1.8.0
 Requires-Dist: seaborn>=0.13.2
 Requires-Dist: setuptools>=80.9.0
 Requires-Dist: statsmodels>=0.14.5

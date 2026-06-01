@@ -11,9 +11,9 @@ The following datasets have been prepared for this course and are **hosted on Hu
 <!-- start:prepared-datasets -->
 | Dataset Name | Domain | Link | Description |
 | ------------ | ------ | ---- | ----------- |
-| `ops_data_15m.parquet` | Energy | [Link](https://huggingface.co/datasets/mt0rm0/opsdata) | Electricity Consumption Data for some European Countries, Freq 15min - Source: ENTSO-E Transparency Platform |
-| `ops_data_30m.parquet` | Energy | [Link](https://huggingface.co/datasets/mt0rm0/opsdata) | Electricity Consumption Data for some European Countries, Freq 30min - Source: ENTSO-E Transparency Platform |
-| `cdc_monthly_regional_air_temp_D` | Climate | [Link](https://huggingface.co/datasets/mt0rm0/cdcdata) | Regional monthly air Temperature in Germany - Source: Deutscher Wetterdienst|
+| `ops_data_15min.parquet` | Energy | [Link](https://huggingface.co/datasets/mt0rm0/opsdata) | Electricity Consumption Data for some European Countries, Freq 15min - Source: ENTSO-E Transparency Platform |
+| `ops_data_30min.parquet` | Energy | [Link](https://huggingface.co/datasets/mt0rm0/opsdata) | Electricity Consumption Data for some European Countries, Freq 30min - Source: ENTSO-E Transparency Platform |
+| `cdc_monthly_regional_air_temp_D.parquet` | Climate | [Link](https://huggingface.co/datasets/mt0rm0/cdcdata) | Regional monthly air Temperature in Germany - Source: Deutscher Wetterdienst|
 <!-- end:prepared-datasets -->
 
 
