@@ -58,10 +58,10 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
 1. [Intro to Neural Networks for Time Series](./notebooks/D01_Neural_networks_intro.ipynb)
     - Train a simple feed-forward NN on lagged features.
     - Compare with linear regression baseline.
-2. RNNs (LSTM, GRU)
+2. [RNNs (LSTM, GRU)](./notebooks/D02_Recurrent_networks.ipynb)
     - Forecast univariate time series with LSTM/GRU.
     - Show sequence-to-sequence architecture.
-3. CNNs for Time Series
+3. [CNNs for Time Series](./notebooks/D03_Convolutional_networks.ipynb)
     - Use 1D convolutions for forecasting.
     - Compare receptive fields with RNN.
 4. Transformers for Time Series
