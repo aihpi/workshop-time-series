@@ -64,10 +64,10 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
 3. [CNNs for Time Series](./notebooks/D03_Convolutional_networks.ipynb)
     - Use 1D convolutions for forecasting.
     - Compare receptive fields with RNN.
-4. Transformers for Time Series
+4. [Transformers for Time Series](./notebooks/D04_Transformers.ipynb)
     - Build a simple attention-based model.
     - Forecast using a pretrained framework (e.g., PyTorch Forecasting or Darts).
-5. State-of-the-Art Architectures
+5. [State-of-the-Art Architectures](./notebooks/D05_Specialised_architectures.ipynb)
     - Experiment with N-BEATS, N-HiTS, Autoformer (using an existing library like NeuralForecast or Darts).
     - Benchmark against traditional methods.
 

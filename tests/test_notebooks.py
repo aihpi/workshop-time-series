@@ -101,6 +101,22 @@ def test_no_result_is_trapped_inside_a_block(name):
 
 
 @pytest.mark.parametrize("name", notebook_ids())
+def test_no_mangled_escapes_in_markdown(name):
+    """A literal tab in prose almost always means a LaTeX escape was eaten.
+
+    Writing "\\text{...}" in a non-raw Python string turns \\t into a tab, which
+    silently breaks the formula it was part of.
+    """
+    notebook = load(NOTEBOOKS_DIR / name)
+    affected = [
+        cell.get("id")
+        for cell in notebook["cells"]
+        if cell["cell_type"] == "markdown" and "\t" in "".join(cell["source"])
+    ]
+    assert not affected, f"literal tab in markdown, check for a lost backslash: {affected}"
+
+
+@pytest.mark.parametrize("name", notebook_ids())
 def test_relative_links_resolve(name):
     """Links to other notebooks and repository files should not 404."""
     notebook = load(NOTEBOOKS_DIR / name)
