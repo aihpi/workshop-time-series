@@ -61,22 +61,38 @@ running on. A red cross almost always means the notebook is running on the wrong
 that a package is missing.
 
 1. In your terminal, from the repository root, run `uv sync`.
-2. In the notebook, check the kernel name in the top-right corner. It has to be
-   **kisz-time-series**. If it is not, click it and pick that kernel from the list.
-3. Restart the kernel (*Kernel > Restart Kernel*) and run the cell again.
+2. In the notebook, check the kernel shown in the top-right corner of VS Code. It has to be the
+   `.venv` inside the repository folder. If it is not, click it, choose *Python Environments...*,
+   and select that one.
+3. Restart the kernel with the **Restart** button in the notebook toolbar, and run the cell again.
 
-If **kisz-time-series** does not appear in the kernel picker, register it once:
+### VS Code does not offer `.venv` in the kernel picker
+
+Two things are worth checking:
+
+- **The folder you opened.** VS Code has to be opened on the repository root, the folder containing
+  `pyproject.toml`. If you opened the `notebooks/` folder, or a parent folder, it will not find the
+  environment.
+- **The extensions.** You need both **Python** (`ms-python.python`) and **Jupyter**
+  (`ms-toolsai.jupyter`). Install them from the Extensions view and reload the window.
+
+If the environment still does not appear, make sure `uv sync` actually created it: there should be a
+`.venv` folder in the repository root.
+
+### Can I use JupyterLab or PyCharm instead of VS Code?
+
+Yes. The course assumes VS Code, but nothing in the material depends on it — any editor that runs
+Jupyter notebooks works, as long as the notebook kernel is the project environment (`.venv` in the
+repository root).
+
+JupyterLab is not part of the environment we ship, so add it first:
 
 ```bash
-uv run python -m ipykernel install --user --name kisz-time-series --display-name "kisz-time-series"
+uv add jupyterlab
+uv run jupyter lab
 ```
 
-### Can I use VS Code / PyCharm instead of JupyterLab?
-
-Yes. Any editor that can run Jupyter notebooks works. The only thing that matters is that you select
-the project environment (`.venv` in the repository root, shown as **kisz-time-series**) as the
-notebook kernel. In VS Code, use *Python: Select Interpreter* or the kernel picker in the top-right
-corner of the notebook.
+Started that way, its default kernel is already the project environment.
 
 ---
 
