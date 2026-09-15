@@ -56,7 +56,11 @@ predictable install. Anything else lives in an optional group, and `uv sync` ins
 ```bash
 uv sync --group dev        # pytest, nbconvert, nbclient: authoring and checking
 uv sync --group advanced   # prophet, used by one section of Notebook B03
+uv sync --group dl         # torch and neuralforecast, used by Part D
 ```
+
+`torch` resolves from PyTorch's CPU-only index on Linux and Windows, configured in `pyproject.toml`.
+The default PyPI wheels on those platforms carry a CUDA runtime of over 2 GB that this course never uses.
 
 Notebooks that rely on an optional package must check for it and skip cleanly when it is missing, the
 way B03 does, so that a default install can still run them end to end.

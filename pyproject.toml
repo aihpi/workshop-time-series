@@ -33,9 +33,25 @@ package = true
 # need and nothing more. Opt in with `uv sync --group dev` or `--group advanced`.
 default-groups = []
 
+# PyTorch publishes CUDA-enabled wheels on PyPI for Linux and Windows, which
+# pull in well over 2 GB of NVIDIA runtime. This course is CPU-only, so those
+# two platforms take the CPU build from PyTorch's own index. macOS wheels on
+# PyPI are already CPU-only.
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform != 'darwin'" }]
+
 [dependency-groups]
 advanced = [
     "prophet>=1.4.0",
+]
+dl = [
+    "neuralforecast>=3.2.2",
+    "torch>=2.6.0",
 ]
 dev = [
     "nbclient>=0.11.0",

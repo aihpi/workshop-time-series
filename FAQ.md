@@ -81,16 +81,19 @@ If the environment still does not appear, make sure `uv sync` actually created i
 
 ### A notebook says a package is not installed
 
-Almost everything the course needs is installed by `uv sync`. One exception is **Prophet**, used in one
-section of Notebook B03. It is a large dependency that nothing else needs, so it is kept out of the
-default install. Add it with:
+Almost everything the course needs is installed by `uv sync`. Two things are kept out of it, because they
+are large and only some notebooks use them:
 
 ```bash
-uv sync --group advanced
+uv sync --group advanced   # Prophet, for one section of Notebook B03
+uv sync --group dl         # PyTorch and NeuralForecast, for Part D
 ```
 
-The notebook skips that section cleanly if Prophet is absent, so you can work through the rest of it
-either way.
+Notebooks that need an optional package check for it and skip cleanly when it is missing, so you can work
+through the rest of them either way.
+
+Part D is the heavy one: PyTorch is around 700 MB on its own. It is installed from PyTorch's CPU-only
+index, so you are not also downloading a couple of gigabytes of GPU runtime you will not use.
 
 ### Can I use JupyterLab or PyCharm instead of VS Code?
 
