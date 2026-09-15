@@ -55,7 +55,7 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
 
 ### Part D: Deep Learning Approaches
 
-1. Intro to Neural Networks for Time Series
+1. [Intro to Neural Networks for Time Series](./notebooks/D01_Neural_networks_intro.ipynb)
     - Train a simple feed-forward NN on lagged features.
     - Compare with linear regression baseline.
 2. RNNs (LSTM, GRU)
