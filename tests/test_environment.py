@@ -26,6 +26,8 @@ REQUIRED_PACKAGES = [
     "seaborn",
     "statsmodels",
     "sklearn",
+    "xgboost",
+    "lightgbm",
     "pyarrow",
     "IPython",
     "missingno",
