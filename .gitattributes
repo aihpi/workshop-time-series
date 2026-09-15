@@ -1,0 +1,30 @@
+# Line endings
+#
+# The repository had a mix of CRLF and LF files, which produced diffs where
+# every line of a file appeared to change. Everything text is now stored with
+# LF, and checked out with whatever your platform uses.
+
+* text=auto
+
+# Be explicit for the file types in this repository, so that the automatic
+# detection never has to guess.
+*.py    text
+*.md    text
+*.txt   text
+*.toml  text
+*.ini   text
+*.lock  text
+*.csv   text
+
+# Notebooks are JSON handled by tooling rather than edited by hand. Keeping
+# them LF everywhere avoids editors rewriting a whole file on save.
+*.ipynb text eol=lf
+
+# Binary, never to be converted.
+*.pdf     binary
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.parquet binary
+*.zip     binary
