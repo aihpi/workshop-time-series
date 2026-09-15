@@ -73,9 +73,9 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
 
 ### Part E: Wrap-Up & Integration
 
-1. End-to-End Forecasting Pipeline
+1. [End-to-End Forecasting Pipeline](./notebooks/E01_End_to_end_pipeline.ipynb)
     - Data prep, feature engineering, baseline models, advanced models, evaluation.
-    - Case study on a real dataset (e.g., electricity demand or M4 competition dataset).
+    - Case study on Belgian electricity demand, forecasting through the 2020 structural break.
 
 ### Part F: Appendices
 
