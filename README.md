@@ -85,6 +85,16 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
     - [Preparing the CDC dataset](./notebooks/F01b_Preparing_CDC_dataset.ipynb)
     - [Preparing the external datasets](./notebooks/F01c_Preparing_external_datasets.ipynb)
 
+### Solutions
+
+The [`solutions/`](./solutions/) folder has a worked solution notebook for each of the fourteen
+notebooks that carry exercises, covering all 42 of them. Each one restates the question, gives the
+code, and explains the reasoning behind the answer. Every notebook links to its own solutions at the
+bottom.
+
+They are most useful as a check on your reasoning once you have attempted an exercise, and least
+useful read straight through.
+
 ---
 
 ## Documentation
