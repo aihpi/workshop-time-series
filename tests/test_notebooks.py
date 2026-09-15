@@ -27,7 +27,8 @@ NOTEBOOKS = sorted(NOTEBOOKS_DIR.glob("*.ipynb")) + sorted(SOLUTIONS_DIR.glob("*
 BY_NAME = {path.name: path for path in NOTEBOOKS}
 
 # Calls whose return value is not meant to be displayed
-STATEMENT_CALLS = {"print", "show", "close", "append", "add", "update", "extend", "sort"}
+# display() renders from anywhere, including inside a block, so it is not trapped.
+STATEMENT_CALLS = {"print", "display", "show", "close", "append", "add", "update", "extend", "sort"}
 
 
 def notebook_ids():
