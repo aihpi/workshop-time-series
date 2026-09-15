@@ -57,8 +57,18 @@ predictable install. Authoring tools live in a separate `dev` group:
 uv sync --group dev
 ```
 
-That adds `nbconvert` and `nbclient`. With them you can execute a notebook from the terminal to
-check that it still runs from top to bottom, without touching the file in the repository:
+That adds `pytest`, `nbconvert` and `nbclient`.
+
+Check the environment itself with the test suite. It verifies the Python version, the packages the
+notebooks need, and that every dataset path constant resolves; datasets you have not downloaded are
+skipped rather than failed:
+
+```bash
+uv run --group dev pytest
+```
+
+With `nbconvert` you can also execute a notebook from the terminal to check that it still runs from
+top to bottom, without touching the file in the repository:
 
 ```bash
 uv run --group dev jupyter nbconvert --to notebook --execute \

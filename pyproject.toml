@@ -30,5 +30,6 @@ default-groups = []
 dev = [
     "nbclient>=0.11.0",
     "nbconvert>=7.17.1",
+    "pytest>=9.1.1",
 ]
 
