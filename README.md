@@ -22,7 +22,7 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
 
 ## Course Structure
 
-0. [Practical Introduction to the Course](./notebooks/01_Introduction.ipynb)
+0. [Practical Introduction to the Course](./notebooks/00_Practical_Introduction.ipynb)
 
 ### Part A: Foundations & Data Exploration
 
@@ -30,7 +30,7 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
 2. [Visualizing time series](./notebooks/A02_Basic_plotting.ipynb)
 3. [Handling Missing Data](./notebooks/A03_Handling_missing_data.ipynb)
 4. [Handling Outliers](./notebooks/A04_Handling_outliers.ipynb)
-5. [Forecasting Baselines](./notebooks/A05_Handling_outliers.ipynb)
+5. [Forecasting Baselines](./notebooks/A05_Forecasting_baselines.ipynb)
 6. [Evaluating Models](./notebooks/A06_Evaluating_models.ipynb)
 
 ### Part B: Statistical Forecasting
@@ -91,7 +91,7 @@ In progress
 
 ## Installation
 
-You can find instructions on how to use this materials [here](/notebooks/01_Introduction.ipynb).
+You can find instructions on how to use these materials [here](./notebooks/00_Practical_Introduction.ipynb).
 
 ## FAQ
 

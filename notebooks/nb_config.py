@@ -20,3 +20,18 @@ CDC_TEMP_PATH = RAW_DATA_PATH / "cdcdata" / "cdc_monthly_regional_air_temp_D.par
 # OPS: electricity consumption data (15-min and 30-min variants)
 OPS_15M_PATH = RAW_DATA_PATH / "opsdata" / "ops_data_15min.parquet"
 OPS_30M_PATH = RAW_DATA_PATH / "opsdata" / "ops_data_30min.parquet"
+
+# ── External datasets ─────────────────────────────────────────────────────────
+# Not hosted on Hugging Face. See data/datasets.md for the download links.
+
+# UCI: individual household electric power consumption (1-min resolution)
+HOUSEHOLD_POWER_PATH = (
+    EXTERNAL_DATA_PATH
+    / "Household_Power_Consumption_Dataset"
+    / "household_power_consumption.txt"
+)
+
+# Kaggle: Rossmann store sales (daily)
+ROSSMANN_TRAIN_PATH = (
+    EXTERNAL_DATA_PATH / "Rossmann_Store_Sales_Dataset" / "train.csv"
+)
