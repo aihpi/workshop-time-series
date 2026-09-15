@@ -18,8 +18,13 @@ from pathlib import Path
 
 import pytest
 
-NOTEBOOKS_DIR = Path(__file__).resolve().parent.parent / "notebooks"
-NOTEBOOKS = sorted(NOTEBOOKS_DIR.glob("*.ipynb"))
+REPO_ROOT = Path(__file__).resolve().parent.parent
+NOTEBOOKS_DIR = REPO_ROOT / "notebooks"
+SOLUTIONS_DIR = REPO_ROOT / "solutions"
+
+# Solution notebooks are checked too: they are notebooks, and they link back
+NOTEBOOKS = sorted(NOTEBOOKS_DIR.glob("*.ipynb")) + sorted(SOLUTIONS_DIR.glob("*.ipynb"))
+BY_NAME = {path.name: path for path in NOTEBOOKS}
 
 # Calls whose return value is not meant to be displayed
 STATEMENT_CALLS = {"print", "show", "close", "append", "add", "update", "extend", "sort"}
@@ -55,7 +60,7 @@ def test_notebooks_exist():
 @pytest.mark.parametrize("name", notebook_ids())
 def test_every_cell_has_an_id(name):
     """nbformat 4.5 requires cell ids, and they keep diffs readable."""
-    notebook = load(NOTEBOOKS_DIR / name)
+    notebook = load(BY_NAME[name])
     missing = [i for i, cell in enumerate(notebook["cells"]) if not cell.get("id")]
     assert not missing, f"cells without an id at positions {missing}"
 
@@ -72,7 +77,7 @@ def test_no_result_is_trapped_inside_a_block(name):
     silently produces no output, which is easy to miss when the cell above it
     printed something.
     """
-    notebook = load(NOTEBOOKS_DIR / name)
+    notebook = load(BY_NAME[name])
     trapped = []
 
     for cell in code_cells(notebook):
@@ -107,7 +112,7 @@ def test_no_mangled_escapes_in_markdown(name):
     Writing "\\text{...}" in a non-raw Python string turns \\t into a tab, which
     silently breaks the formula it was part of.
     """
-    notebook = load(NOTEBOOKS_DIR / name)
+    notebook = load(BY_NAME[name])
     affected = [
         cell.get("id")
         for cell in notebook["cells"]
@@ -119,7 +124,7 @@ def test_no_mangled_escapes_in_markdown(name):
 @pytest.mark.parametrize("name", notebook_ids())
 def test_relative_links_resolve(name):
     """Links to other notebooks and repository files should not 404."""
-    notebook = load(NOTEBOOKS_DIR / name)
+    notebook = load(BY_NAME[name])
     broken = []
 
     for cell in notebook["cells"]:
@@ -128,7 +133,7 @@ def test_relative_links_resolve(name):
         for target in re.findall(r"\]\(([^)]+)\)", "".join(cell["source"])):
             if target.startswith(("http://", "https://", "#")):
                 continue
-            path = (NOTEBOOKS_DIR / target.split("#")[0]).resolve()
+            path = (BY_NAME[name].parent / target.split("#")[0]).resolve()
             if not path.exists():
                 broken.append(target)
 
@@ -142,7 +147,7 @@ def test_relative_links_resolve(name):
 @pytest.mark.parametrize("name", notebook_ids())
 def test_contents_anchors_have_matching_headings(name):
     """Every '[Section](#anchor)' needs a heading carrying that id."""
-    notebook = load(NOTEBOOKS_DIR / name)
+    notebook = load(BY_NAME[name])
     source = "\n".join("".join(cell["source"]) for cell in notebook["cells"])
 
     anchors = set(re.findall(r"\]\(#([^)]+)\)", source))
