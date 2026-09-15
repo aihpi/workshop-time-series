@@ -24,3 +24,6 @@ docs/_build/
 # Data
 data/*
 !data/datasets.md
+
+# Python packaging build artifacts
+*.egg-info/

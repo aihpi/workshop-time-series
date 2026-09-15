@@ -48,6 +48,26 @@ If you have other ideas, features, or contributions in mind that are not covered
 2. Clearly explain your proposed contribution and its purpose.
 3. Provide any necessary details to help understand and implement your contribution.
 
+## Working on the Code
+
+The course environment installs only what the notebooks need, so that participants get a small,
+predictable install. Authoring tools live in a separate `dev` group:
+
+```bash
+uv sync --group dev
+```
+
+That adds `nbconvert` and `nbclient`. With them you can execute a notebook from the terminal to
+check that it still runs from top to bottom, without touching the file in the repository:
+
+```bash
+uv run --group dev jupyter nbconvert --to notebook --execute \
+    --output-dir /tmp --output check.ipynb notebooks/A05_Forecasting_baselines.ipynb
+```
+
+Please run that check on any notebook you change, and clear the outputs before committing: stored
+plots make notebooks large and their diffs unreadable.
+
 ## Code of Conduct
 
 Please note that all contributions should adhere to our [Code of Conduct](CODE_OF_CONDUCT.md). Ensure respectful and inclusive communication throughout the contribution process.
