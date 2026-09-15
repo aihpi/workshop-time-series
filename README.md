@@ -49,7 +49,7 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
 2. [ML Models for Forecasting](./notebooks/C02_Machine_learning_models.ipynb)
     - Compare linear regression, random forests, gradient boosting on time series regression tasks.
     - Discuss limitations of ML vs statistical baselines.
-3. Ensembles and Model Combinations
+3. [Ensembles and Model Combinations](./notebooks/C03_Ensembles.ipynb)
     - Weighted averaging, stacking simple ARIMA + RF + XGBoost.
     - Show how ensembling improves robustness.
 
