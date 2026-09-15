@@ -46,7 +46,7 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
     - Generate lag features, rolling statistics, Fourier terms, calendar features.
     - Explore feature importances with tree models.
 
-2. ML Models for Forecasting
+2. [ML Models for Forecasting](./notebooks/C02_Machine_learning_models.ipynb)
     - Compare linear regression, random forests, gradient boosting on time series regression tasks.
     - Discuss limitations of ML vs statistical baselines.
 3. Ensembles and Model Combinations
