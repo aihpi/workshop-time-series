@@ -22,16 +22,18 @@ OPS_15M_PATH = RAW_DATA_PATH / "opsdata" / "ops_data_15min.parquet"
 OPS_30M_PATH = RAW_DATA_PATH / "opsdata" / "ops_data_30min.parquet"
 
 # ── External datasets ─────────────────────────────────────────────────────────
-# Not hosted on Hugging Face. See data/datasets.md for the download links.
+# Not hosted on Hugging Face. Notebook F01c downloads them, or explains how to
+# obtain them where the licence does not allow us to redistribute them.
 
 # UCI: individual household electric power consumption (1-min resolution)
-HOUSEHOLD_POWER_PATH = (
-    EXTERNAL_DATA_PATH
-    / "Household_Power_Consumption_Dataset"
-    / "household_power_consumption.txt"
-)
+HOUSEHOLD_POWER_DIR = EXTERNAL_DATA_PATH / "Household_Power_Consumption_Dataset"
+HOUSEHOLD_POWER_PATH = HOUSEHOLD_POWER_DIR / "household_power_consumption.txt"
+
+# UCI: air quality measurements from a multisensor device (hourly)
+AIR_QUALITY_DIR = EXTERNAL_DATA_PATH / "Air_Quality_Dataset"
+AIR_QUALITY_PATH = AIR_QUALITY_DIR / "AirQualityUCI.csv"
 
 # Kaggle: Rossmann store sales (daily)
-ROSSMANN_TRAIN_PATH = (
-    EXTERNAL_DATA_PATH / "Rossmann_Store_Sales_Dataset" / "train.csv"
-)
+ROSSMANN_DIR = EXTERNAL_DATA_PATH / "Rossmann_Store_Sales_Dataset"
+ROSSMANN_TRAIN_PATH = ROSSMANN_DIR / "train.csv"
+ROSSMANN_STORE_PATH = ROSSMANN_DIR / "store.csv"

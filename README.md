@@ -78,8 +78,12 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
     - Case study on a real dataset (e.g., electricity demand or M4 competition dataset).
 
 ### Part F: Appendices
-1. Using the recommended datasets
-    - Code for quickly setting up the datasets used exemplary on this course.
+
+1. [Using the datasets](./notebooks/F01_Using_the_datasets.ipynb)
+    - Overview of every dataset used in the course, and where each one comes from.
+    - [Preparing the OPS datasets](./notebooks/F01a_Preparing_OPS_datasets.ipynb)
+    - [Preparing the CDC dataset](./notebooks/F01b_Preparing_CDC_dataset.ipynb)
+    - [Preparing the external datasets](./notebooks/F01c_Preparing_external_datasets.ipynb)
 
 ---
 

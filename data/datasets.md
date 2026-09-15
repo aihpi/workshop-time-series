@@ -24,6 +24,33 @@ The following datasets have been prepared for this course and are **hosted on Hu
 
 ---
 
+## External datasets used in the course
+
+Some notebooks use datasets that we do not host ourselves. They are downloaded from their original
+publisher and stored under `data/external/`, one folder per dataset.
+
+Notebook [F01c](../notebooks/F01c_Preparing_external_datasets.ipynb) prepares all of them. The two
+UCI datasets are fetched automatically; the Rossmann data has to be downloaded by hand, because
+Kaggle requires every user to accept the competition rules with their own account.
+
+<!-- start:external-datasets -->
+| Dataset Name | Domain | Link | Folder | Used in | How to get it |
+| ------------ | ------ | ---- | ------ | ------- | ------------- |
+| **Individual Household Electric Power Consumption** | Energy | [UCI](https://archive.ics.uci.edu/dataset/235/individual+household+electric+power+consumption) | `Household_Power_Consumption_Dataset/` | A03 | Automatic (F01c) |
+| **Air Quality** | Environment | [UCI](https://archive.ics.uci.edu/dataset/360/air+quality) | `Air_Quality_Dataset/` | A04 | Automatic (F01c) |
+| **Rossmann Store Sales** | Retail | [Kaggle](https://www.kaggle.com/competitions/rossmann-store-sales) | `Rossmann_Store_Sales_Dataset/` | A04 | Manual, see F01c |
+<!-- end:external-datasets -->
+
+📌 **Usage Notes**
+
+- `data/` is ignored by git, so these files stay on your machine and never end up in a commit.
+- Their paths are available as constants in `notebooks/nb_config.py`, so you never need to write one
+  out by hand.
+- Each dataset keeps the licence of its original publisher. The links above are the authoritative
+  source for the terms you agree to.
+
+---
+
 ## Additional Relevant Datasets
 
 The following datasets were not prepared for this course, but cover different fields and may be useful for you.  

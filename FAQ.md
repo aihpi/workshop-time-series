@@ -133,14 +133,25 @@ Datasets are deliberately not stored in this repository — they are too large f
 them come with licences that do not allow redistribution. You download them once, and they land in
 `data/`, which git ignores.
 
-There are two kinds:
+There are two kinds, and an appendix notebook prepares each of them:
 
-- **Prepared datasets**, which we host on Hugging Face. The appendix notebooks in Part F download
-  them for you.
-- **External datasets**, which you download yourself from their original source (Kaggle, UCI, ...)
-  and place under `data/external/`.
+- **Prepared datasets**, which we host on Hugging Face —
+  [F01a](./notebooks/F01a_Preparing_OPS_datasets.ipynb) and
+  [F01b](./notebooks/F01b_Preparing_CDC_dataset.ipynb).
+- **External datasets**, which come from their original publisher and land in `data/external/` —
+  [F01c](./notebooks/F01c_Preparing_external_datasets.ipynb).
 
 Both kinds, with their links, are listed in [`data/datasets.md`](./data/datasets.md).
+
+### Why do I have to download the Rossmann data by hand?
+
+It is Kaggle competition data. Kaggle requires every user to accept the competition rules with their
+own account before downloading, which is not something we can do for you, and the rules do not let us
+redistribute the files ourselves. Section 5 of
+[F01c](./notebooks/F01c_Preparing_external_datasets.ipynb) walks you through it — it takes a minute,
+and the notebook then checks that the files landed in the right place.
+
+The two UCI datasets have no such restriction, so F01c downloads those for you automatically.
 
 ### `FileNotFoundError` when a notebook loads its data
 
