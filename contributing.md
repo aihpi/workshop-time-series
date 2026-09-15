@@ -51,13 +51,15 @@ If you have other ideas, features, or contributions in mind that are not covered
 ## Working on the Code
 
 The course environment installs only what the notebooks need, so that participants get a small,
-predictable install. Authoring tools live in a separate `dev` group:
+predictable install. Anything else lives in an optional group, and `uv sync` installs none of them:
 
 ```bash
-uv sync --group dev
+uv sync --group dev        # pytest, nbconvert, nbclient: authoring and checking
+uv sync --group advanced   # prophet, used by one section of Notebook B03
 ```
 
-That adds `pytest`, `nbconvert` and `nbclient`.
+Notebooks that rely on an optional package must check for it and skip cleanly when it is missing, the
+way B03 does, so that a default install can still run them end to end.
 
 Check the environment itself with the test suite. It verifies the Python version, the packages the
 notebooks need, and that every dataset path constant resolves; datasets you have not downloaded are

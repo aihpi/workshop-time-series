@@ -79,6 +79,19 @@ Two things are worth checking:
 If the environment still does not appear, make sure `uv sync` actually created it: there should be a
 `.venv` folder in the repository root.
 
+### A notebook says a package is not installed
+
+Almost everything the course needs is installed by `uv sync`. One exception is **Prophet**, used in one
+section of Notebook B03. It is a large dependency that nothing else needs, so it is kept out of the
+default install. Add it with:
+
+```bash
+uv sync --group advanced
+```
+
+The notebook skips that section cleanly if Prophet is absent, so you can work through the rest of it
+either way.
+
 ### Can I use JupyterLab or PyCharm instead of VS Code?
 
 Yes. The course assumes VS Code, but nothing in the material depends on it — any editor that runs
