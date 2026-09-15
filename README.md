@@ -14,7 +14,7 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
 
 **Current version of the materials**:
 
-- Code v1.0.0
+- Code v1.1.0
 - Presentation Slides v1.0.0
 - Extra resources: v1.0.0
 
@@ -99,9 +99,20 @@ useful read straight through.
 
 ## Documentation
 
-In progress
+The notebooks are the documentation: each one explains its own subject, and Part F documents the datasets.
+Alongside them:
 
-...
+- [`notebooks/00_Practical_Introduction.ipynb`](./notebooks/00_Practical_Introduction.ipynb) — setup, how
+  to run the notebooks, and how the course is organised.
+- [`solutions/`](./solutions/) — worked answers to every exercise, one notebook per notebook.
+- [`data/datasets.md`](./data/datasets.md) — every dataset, its source, its licence, and where it belongs
+  on disk.
+- [`FAQ.md`](./FAQ.md) — the questions that come up most often, with answers.
+- [`contributing.md`](./contributing.md) — how to report a problem or propose a change.
+
+`tests/` checks the environment and the structural health of the notebooks. Run it with
+`uv run --group dev pytest`, which is also the quickest way to confirm an installation works and to find
+out which datasets you still need to download.
 
 ## Installation
 
