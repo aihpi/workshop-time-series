@@ -42,7 +42,7 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
 
 ### Part C: Machine Learning Approaches
 
-1. Feature Engineering for ML Forecasting
+1. [Feature Engineering for ML Forecasting](./notebooks/C01_Feature_engineering.ipynb)
     - Generate lag features, rolling statistics, Fourier terms, calendar features.
     - Explore feature importances with tree models.
 
