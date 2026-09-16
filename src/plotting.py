@@ -4,6 +4,20 @@ import pandas as pd
 
 
 def plot_imputed_data(df, gaps, func):
+    """Plot several imputation methods against each gap they are filling.
+
+    Used by Notebook A03 to compare imputation methods by eye rather than by
+    score, because the useful question about a filled gap is whether it looks
+    like the series around it. Each gap gets a panel showing the hour either
+    side of it, the same window from the previous day for reference, and one
+    line per method.
+
+    Args:
+        df: the series to plot, indexed by timestamp, with a ``Voltage`` column.
+        gaps: maps the timestamp a gap starts at to its length in minutes.
+        func: called with the window around each gap, and returns a mapping of
+            method name to the imputed series for that method.
+    """
     # extracts the datetime of the gaps
     gap_dates = pd.to_datetime(list(gaps.keys()), format="%Y-%m-%d %H:%M:%S")
 

@@ -2,9 +2,18 @@ from pathlib import Path
 from IPython.display import Markdown, display
 
 
-# Function to parse and display specific sections from datasets.md
 def display_datasets_info(section: str) -> None:
-    file_path = Path("../data/datasets.md")  # Path object
+    """Render one section of `data/datasets.md` inside a notebook.
+
+    That file is the single description of every dataset, and it is marked up
+    with ``<!-- start:name -->`` and ``<!-- end:name -->`` comments so that a
+    notebook can show just the part relevant to it. Keeping one copy is the
+    point: a dataset's provenance is described once and read in several places.
+
+    Args:
+        section: the name between the start and end markers.
+    """
+    file_path = Path("../data/datasets.md")
     start_marker = f"<!-- start:{section} -->"
     end_marker = f"<!-- end:{section} -->"
 

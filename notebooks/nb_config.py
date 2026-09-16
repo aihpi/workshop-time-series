@@ -1,3 +1,15 @@
+"""Where every dataset lives.
+
+Paths are derived from this file's own location, so a notebook finds its data
+wherever the repository is cloned and whichever directory Jupyter was started
+in. Notebooks import from here rather than writing paths of their own, which is
+why moving a dataset is a one-line change.
+
+The datasets themselves are not in the repository. The appendix notebooks in
+Part F download them into the directories named below; `data/datasets.md`
+documents where each one comes from and under what licence.
+"""
+
 import sys
 from pathlib import Path
 

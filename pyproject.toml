@@ -58,4 +58,9 @@ dev = [
     "nbconvert>=7.17.1",
     "pytest>=9.1.1",
 ]
+docs = [
+    "furo>=2025.9.25",
+    "myst-parser>=4.0.1",
+    "sphinx>=8.2.3",
+]
 

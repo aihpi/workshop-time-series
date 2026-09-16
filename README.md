@@ -114,6 +114,13 @@ Alongside them:
 `uv run --group dev pytest`, which is also the quickest way to confirm an installation works and to find
 out which datasets you still need to download.
 
+There is also a documentation site, which gathers the above with a setup guide and notes for maintainers.
+It includes these files rather than restating them, so there is one copy of each to keep correct:
+
+```bash
+uv run --group docs sphinx-build -b html docs docs/_build/html
+```
+
 ## Installation
 
 You can find instructions on how to use these materials [here](./notebooks/00_Practical_Introduction.ipynb).

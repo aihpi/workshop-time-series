@@ -102,6 +102,19 @@ That re-executes the producing notebooks at full size and reports any figure tha
 it takes well over an hour for the whole set. It deliberately does not edit anything: a changed score
 usually means the surrounding prose needs rewriting too, and the registry cannot do that for you.
 
+### Documentation
+
+The site under `docs/` is built with Sphinx:
+
+```bash
+uv run --group docs sphinx-build -b html docs docs/_build/html
+```
+
+It holds very little prose of its own. `FAQ.md`, this file and `data/datasets.md` are pulled in at build
+time, with their repository-relative links rewritten to point at GitHub, so each stays a single copy that
+is correct both here and on the site. The pages that are genuinely new are the setup guide, the
+maintainer notes, and the reference for the helper modules.
+
 ## Code of Conduct
 
 Please note that all contributions should adhere to our [Code of Conduct](CODE_OF_CONDUCT.md). Ensure respectful and inclusive communication throughout the contribution process.
