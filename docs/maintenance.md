@@ -47,7 +47,7 @@ Notebooks D01 and D03 have no reduced mode; they always train on everything.
 
 Several notebooks compare their own model against ones fitted earlier in the course rather than refitting
 them, which would double the runtime of Part D. Those figures live in
-[`notebooks/reference_scores.py`](https://github.com/aihpi/kisz-time-series/blob/main/notebooks/reference_scores.py),
+[`notebooks/reference_scores.py`](https://github.com/aihpi/workshop-time-series/blob/main/notebooks/reference_scores.py),
 not as literals in the notebook that quotes them.
 
 The registry records more than the number, because a bare number cannot be checked:
@@ -85,7 +85,7 @@ D03, which are cross-notebook references living in markdown where the registry c
 ## Exercises and solutions
 
 Every notebook with exercises has a matching notebook in
-[`solutions/`](https://github.com/aihpi/kisz-time-series/blob/main/solutions/), linked from its footer.
+[`solutions/`](https://github.com/aihpi/workshop-time-series/blob/main/solutions/), linked from its footer.
 The solutions are checked by the same structural tests as the notebooks.
 
 If you add or change an exercise, **run it before you write the prompt**. Several prompts in this course

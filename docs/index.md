@@ -27,7 +27,7 @@ Then open `notebooks/00_Practical_Introduction.ipynb` and work forward.
 
 The eighteen teaching notebooks divide into five parts, each building on the last. Fifty exercises are
 spread across them, and every one has a worked solution in
-[`solutions/`](https://github.com/aihpi/kisz-time-series/blob/main/solutions/).
+[`solutions/`](https://github.com/aihpi/workshop-time-series/blob/main/solutions/).
 
 :::{list-table}
 :header-rows: 1
