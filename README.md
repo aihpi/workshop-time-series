@@ -14,7 +14,7 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
 
 **Current version of the materials**:
 
-- Code v1.1.0
+- Code v1.0.0
 - Presentation Slides v1.0.0
 - Extra resources: v1.0.0
 
