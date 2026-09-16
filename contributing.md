@@ -84,6 +84,24 @@ uv run --group dev jupyter nbconvert --to notebook --execute \
 Please run that check on any notebook you change, and clear the outputs before committing: stored
 plots make notebooks large and their diffs unreadable.
 
+### Figures carried between notebooks
+
+Several notebooks compare their own model against ones fitted earlier in the course, rather than
+refitting them and doubling the runtime of Part D. Those figures live in
+[`notebooks/reference_scores.py`](notebooks/reference_scores.py), not as literals in the notebook that
+quotes them, so that a training change upstream does not leave stale numbers scattered downstream. The
+test suite fails if a published figure is written out by hand.
+
+If you change a training setting, the registry will not notice on its own. Check it with:
+
+```bash
+uv run --group dev python tools/refresh_reference_scores.py --only D03
+```
+
+That re-executes the producing notebooks at full size and reports any figure that no longer matches, so
+it takes well over an hour for the whole set. It deliberately does not edit anything: a changed score
+usually means the surrounding prose needs rewriting too, and the registry cannot do that for you.
+
 ## Code of Conduct
 
 Please note that all contributions should adhere to our [Code of Conduct](CODE_OF_CONDUCT.md). Ensure respectful and inclusive communication throughout the contribution process.

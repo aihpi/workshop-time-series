@@ -14,6 +14,7 @@ To check that a notebook still *runs*, execute it; see contributing.md.
 import ast
 import json
 import re
+import sys
 from pathlib import Path
 
 import pytest
@@ -155,3 +156,54 @@ def test_contents_anchors_have_matching_headings(name):
     headings = set(re.findall(r"<h[1-6][^>]*\sid=\"([^\"]+)\"", source))
 
     assert not anchors - headings, f"contents links with no matching heading id: {sorted(anchors - headings)}"
+
+
+def _published_figures():
+    """Every figure the registry publishes, as it would appear written out."""
+    sys.path.insert(0, str(NOTEBOOKS_DIR))
+    try:
+        import reference_scores
+    finally:
+        sys.path.pop(0)
+
+    values = set()
+    for score in reference_scores.SCORES.values():
+        for number in (score.mae, score.workshop_mae, score.seconds):
+            if number is not None:
+                values.add(f"{number:g}")
+    return values
+
+
+PUBLISHED_FIGURES = _published_figures()
+
+
+@pytest.mark.parametrize("name", notebook_ids())
+def test_carried_scores_come_from_the_registry(name):
+    """A figure produced by another notebook belongs in reference_scores.py.
+
+    Several notebooks compare their own model against ones fitted earlier in the
+    course. Written as literals, those numbers go stale silently the first time
+    a training setting changes upstream, in several places at once.
+
+    This checks the regression that actually happens: one of the registry's own
+    published figures, pasted back into a notebook as a literal. It cannot catch
+    a *new* carried figure that was never added to the registry — detecting that
+    generically flags too much honest arithmetic to be worth it.
+    """
+    notebook = load(BY_NAME[name])
+    offenders = []
+
+    for cell in code_cells(notebook):
+        source = "".join(cell["source"])
+        if "reference_scores" in source:
+            continue
+        for line in source.splitlines():
+            code = line.split("#", 1)[0]
+            for number in re.findall(r"\b\d{2,4}\.\d+\b", code):
+                if f"{float(number):g}" in PUBLISHED_FIGURES:
+                    offenders.append(f"{cell.get('id')}: {line.strip()[:70]}")
+
+    assert not offenders, (
+        "these are figures published by reference_scores.py, written as "
+        "literals. Import them instead:\n  " + "\n  ".join(offenders)
+    )
