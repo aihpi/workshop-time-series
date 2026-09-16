@@ -24,3 +24,11 @@ docs/_build/
 # Data
 data/*
 !data/datasets.md
+
+# Python packaging build artifacts
+*.egg-info/
+
+# PyTorch Lightning training artifacts, written next to the notebooks
+lightning_logs/
+docs/_build/
+docs/_generated/

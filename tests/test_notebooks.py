@@ -1,0 +1,209 @@
+"""Structural checks on the course notebooks.
+
+These do not execute anything, so they are fast enough to run on every change.
+They catch the mistakes that are easy to make and hard to notice when a notebook
+is authored or edited:
+
+- a result that never displays, because its expression is indented inside a block;
+- a link to a notebook or file that does not exist;
+- a contents entry pointing at a heading id that was never added.
+
+To check that a notebook still *runs*, execute it; see contributing.md.
+"""
+
+import ast
+import json
+import re
+import sys
+from pathlib import Path
+
+import pytest
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+NOTEBOOKS_DIR = REPO_ROOT / "notebooks"
+SOLUTIONS_DIR = REPO_ROOT / "solutions"
+
+# Solution notebooks are checked too: they are notebooks, and they link back
+NOTEBOOKS = sorted(NOTEBOOKS_DIR.glob("*.ipynb")) + sorted(SOLUTIONS_DIR.glob("*.ipynb"))
+BY_NAME = {path.name: path for path in NOTEBOOKS}
+
+# Calls whose return value is not meant to be displayed
+# display() renders from anywhere, including inside a block, so it is not trapped.
+STATEMENT_CALLS = {"print", "display", "show", "close", "append", "add", "update", "extend", "sort"}
+
+
+def notebook_ids():
+    return [path.name for path in NOTEBOOKS]
+
+
+def load(path):
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def code_cells(notebook):
+    return [cell for cell in notebook["cells"] if cell["cell_type"] == "code"]
+
+
+def called_name(node):
+    """Dotted name of a call, e.g. 'plt.show' -> 'plt.show'."""
+    func, parts = node.func, []
+    while isinstance(func, ast.Attribute):
+        parts.append(func.attr)
+        func = func.value
+    if isinstance(func, ast.Name):
+        parts.append(func.id)
+    return ".".join(reversed(parts))
+
+
+def test_notebooks_exist():
+    assert NOTEBOOKS, f"no notebooks found in {NOTEBOOKS_DIR}"
+
+
+@pytest.mark.parametrize("name", notebook_ids())
+def test_every_cell_has_an_id(name):
+    """nbformat 4.5 requires cell ids, and they keep diffs readable."""
+    notebook = load(BY_NAME[name])
+    missing = [i for i, cell in enumerate(notebook["cells"]) if not cell.get("id")]
+    assert not missing, f"cells without an id at positions {missing}"
+
+
+@pytest.mark.parametrize("name", notebook_ids())
+def test_no_result_is_trapped_inside_a_block(name):
+    """A cell's last expression only displays if it is at the top level.
+
+    Writing
+
+        if AVAILABLE:
+            results.round(1)
+
+    silently produces no output, which is easy to miss when the cell above it
+    printed something.
+    """
+    notebook = load(BY_NAME[name])
+    trapped = []
+
+    for cell in code_cells(notebook):
+        try:
+            tree = ast.parse("".join(cell["source"]))
+        except SyntaxError:
+            continue
+        if not tree.body:
+            continue
+
+        last = tree.body[-1]
+        if not isinstance(last, (ast.If, ast.For, ast.While, ast.With, ast.Try)):
+            continue
+
+        body = getattr(last, "body", [])
+        if not body or not isinstance(body[-1], ast.Expr):
+            continue
+
+        value = body[-1].value
+        if isinstance(value, ast.Call) and called_name(value).split(".")[-1] in STATEMENT_CALLS:
+            continue
+
+        trapped.append(f"{cell.get('id')}: {ast.unparse(value)[:60]}")
+
+    assert not trapped, "expression will not display; move it to the top level:\n  " + "\n  ".join(trapped)
+
+
+@pytest.mark.parametrize("name", notebook_ids())
+def test_no_mangled_escapes_in_markdown(name):
+    """A literal tab in prose almost always means a LaTeX escape was eaten.
+
+    Writing "\\text{...}" in a non-raw Python string turns \\t into a tab, which
+    silently breaks the formula it was part of.
+    """
+    notebook = load(BY_NAME[name])
+    affected = [
+        cell.get("id")
+        for cell in notebook["cells"]
+        if cell["cell_type"] == "markdown" and "\t" in "".join(cell["source"])
+    ]
+    assert not affected, f"literal tab in markdown, check for a lost backslash: {affected}"
+
+
+@pytest.mark.parametrize("name", notebook_ids())
+def test_relative_links_resolve(name):
+    """Links to other notebooks and repository files should not 404."""
+    notebook = load(BY_NAME[name])
+    broken = []
+
+    for cell in notebook["cells"]:
+        if cell["cell_type"] != "markdown":
+            continue
+        for target in re.findall(r"\]\(([^)]+)\)", "".join(cell["source"])):
+            if target.startswith(("http://", "https://", "#")):
+                continue
+            path = (BY_NAME[name].parent / target.split("#")[0]).resolve()
+            if not path.exists():
+                broken.append(target)
+
+    # Notebooks released later in the course are linked before they exist
+    unwritten = [target for target in broken if re.search(r"/[A-F]\d\d[_a-zA-Z]*\.ipynb$", target)]
+    real = [target for target in broken if target not in unwritten]
+
+    assert not real, f"broken links: {real}"
+
+
+@pytest.mark.parametrize("name", notebook_ids())
+def test_contents_anchors_have_matching_headings(name):
+    """Every '[Section](#anchor)' needs a heading carrying that id."""
+    notebook = load(BY_NAME[name])
+    source = "\n".join("".join(cell["source"]) for cell in notebook["cells"])
+
+    anchors = set(re.findall(r"\]\(#([^)]+)\)", source))
+    headings = set(re.findall(r"<h[1-6][^>]*\sid=\"([^\"]+)\"", source))
+
+    assert not anchors - headings, f"contents links with no matching heading id: {sorted(anchors - headings)}"
+
+
+def _published_figures():
+    """Every figure the registry publishes, as it would appear written out."""
+    sys.path.insert(0, str(NOTEBOOKS_DIR))
+    try:
+        import reference_scores
+    finally:
+        sys.path.pop(0)
+
+    values = set()
+    for score in reference_scores.SCORES.values():
+        for number in (score.mae, score.workshop_mae, score.seconds):
+            if number is not None:
+                values.add(f"{number:g}")
+    return values
+
+
+PUBLISHED_FIGURES = _published_figures()
+
+
+@pytest.mark.parametrize("name", notebook_ids())
+def test_carried_scores_come_from_the_registry(name):
+    """A figure produced by another notebook belongs in reference_scores.py.
+
+    Several notebooks compare their own model against ones fitted earlier in the
+    course. Written as literals, those numbers go stale silently the first time
+    a training setting changes upstream, in several places at once.
+
+    This checks the regression that actually happens: one of the registry's own
+    published figures, pasted back into a notebook as a literal. It cannot catch
+    a *new* carried figure that was never added to the registry — detecting that
+    generically flags too much honest arithmetic to be worth it.
+    """
+    notebook = load(BY_NAME[name])
+    offenders = []
+
+    for cell in code_cells(notebook):
+        source = "".join(cell["source"])
+        if "reference_scores" in source:
+            continue
+        for line in source.splitlines():
+            code = line.split("#", 1)[0]
+            for number in re.findall(r"\b\d{2,4}\.\d+\b", code):
+                if f"{float(number):g}" in PUBLISHED_FIGURES:
+                    offenders.append(f"{cell.get('id')}: {line.strip()[:70]}")
+
+    assert not offenders, (
+        "these are figures published by reference_scores.py, written as "
+        "literals. Import them instead:\n  " + "\n  ".join(offenders)
+    )

@@ -22,7 +22,7 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
 
 ## Course Structure
 
-0. [Practical Introduction to the Course](./notebooks/01_Introduction.ipynb)
+0. [Practical Introduction to the Course](./notebooks/00_Practical_Introduction.ipynb)
 
 ### Part A: Foundations & Data Exploration
 
@@ -30,7 +30,7 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
 2. [Visualizing time series](./notebooks/A02_Basic_plotting.ipynb)
 3. [Handling Missing Data](./notebooks/A03_Handling_missing_data.ipynb)
 4. [Handling Outliers](./notebooks/A04_Handling_outliers.ipynb)
-5. [Forecasting Baselines](./notebooks/A05_Handling_outliers.ipynb)
+5. [Forecasting Baselines](./notebooks/A05_Forecasting_baselines.ipynb)
 6. [Evaluating Models](./notebooks/A06_Evaluating_models.ipynb)
 
 ### Part B: Statistical Forecasting
@@ -42,52 +42,88 @@ In this repository, you'll find code and resources for the OpenHPI course [Time 
 
 ### Part C: Machine Learning Approaches
 
-1. Feature Engineering for ML Forecasting
+1. [Feature Engineering for ML Forecasting](./notebooks/C01_Feature_engineering.ipynb)
     - Generate lag features, rolling statistics, Fourier terms, calendar features.
     - Explore feature importances with tree models.
 
-2. ML Models for Forecasting
+2. [ML Models for Forecasting](./notebooks/C02_Machine_learning_models.ipynb)
     - Compare linear regression, random forests, gradient boosting on time series regression tasks.
     - Discuss limitations of ML vs statistical baselines.
-3. Ensembles and Model Combinations
+3. [Ensembles and Model Combinations](./notebooks/C03_Ensembles.ipynb)
     - Weighted averaging, stacking simple ARIMA + RF + XGBoost.
     - Show how ensembling improves robustness.
 
 ### Part D: Deep Learning Approaches
 
-1. Intro to Neural Networks for Time Series
+1. [Intro to Neural Networks for Time Series](./notebooks/D01_Neural_networks_intro.ipynb)
     - Train a simple feed-forward NN on lagged features.
     - Compare with linear regression baseline.
-2. RNNs (LSTM, GRU)
+2. [RNNs (LSTM, GRU)](./notebooks/D02_Recurrent_networks.ipynb)
     - Forecast univariate time series with LSTM/GRU.
     - Show sequence-to-sequence architecture.
-3. CNNs for Time Series
+3. [CNNs for Time Series](./notebooks/D03_Convolutional_networks.ipynb)
     - Use 1D convolutions for forecasting.
     - Compare receptive fields with RNN.
-4. Transformers for Time Series
+4. [Transformers for Time Series](./notebooks/D04_Transformers.ipynb)
     - Build a simple attention-based model.
     - Forecast using a pretrained framework (e.g., PyTorch Forecasting or Darts).
-5. State-of-the-Art Architectures
+5. [State-of-the-Art Architectures](./notebooks/D05_Specialised_architectures.ipynb)
     - Experiment with N-BEATS, N-HiTS, Autoformer (using an existing library like NeuralForecast or Darts).
     - Benchmark against traditional methods.
 
 ### Part E: Wrap-Up & Integration
 
-1. End-to-End Forecasting Pipeline
+1. [End-to-End Forecasting Pipeline](./notebooks/E01_End_to_end_pipeline.ipynb)
     - Data prep, feature engineering, baseline models, advanced models, evaluation.
-    - Case study on a real dataset (e.g., electricity demand or M4 competition dataset).
+    - Case study on Belgian electricity demand, forecasting through the 2020 structural break.
+
+### Part F: Appendices
+
+1. [Using the datasets](./notebooks/F01_Using_the_datasets.ipynb)
+    - Overview of every dataset used in the course, and where each one comes from.
+    - [Preparing the OPS datasets](./notebooks/F01a_Preparing_OPS_datasets.ipynb)
+    - [Preparing the CDC dataset](./notebooks/F01b_Preparing_CDC_dataset.ipynb)
+    - [Preparing the external datasets](./notebooks/F01c_Preparing_external_datasets.ipynb)
+
+### Solutions
+
+The [`solutions/`](./solutions/) folder has a worked solution notebook for each of the eighteen
+notebooks that carry exercises, covering all 50 of them. Each one restates the question, gives the
+code, and explains the reasoning behind the answer. Every notebook links to its own solutions at the
+bottom.
+
+They are most useful as a check on your reasoning once you have attempted an exercise, and least
+useful read straight through.
 
 ---
 
 ## Documentation
 
-In progress
+The notebooks are the documentation: each one explains its own subject, and Part F documents the datasets.
+Alongside them:
 
-...
+- [`notebooks/00_Practical_Introduction.ipynb`](./notebooks/00_Practical_Introduction.ipynb) — setup, how
+  to run the notebooks, and how the course is organised.
+- [`solutions/`](./solutions/) — worked answers to every exercise, one notebook per notebook.
+- [`data/datasets.md`](./data/datasets.md) — every dataset, its source, its licence, and where it belongs
+  on disk.
+- [`FAQ.md`](./FAQ.md) — the questions that come up most often, with answers.
+- [`contributing.md`](./contributing.md) — how to report a problem or propose a change.
+
+`tests/` checks the environment and the structural health of the notebooks. Run it with
+`uv run --group dev pytest`, which is also the quickest way to confirm an installation works and to find
+out which datasets you still need to download.
+
+There is also a documentation site, which gathers the above with a setup guide and notes for maintainers.
+It includes these files rather than restating them, so there is one copy of each to keep correct:
+
+```bash
+uv run --group docs sphinx-build -b html docs docs/_build/html
+```
 
 ## Installation
 
-You can find instructions on how to use this materials [here](/notebooks/01_Introduction.ipynb).
+You can find instructions on how to use these materials [here](./notebooks/00_Practical_Introduction.ipynb).
 
 ## FAQ
 
