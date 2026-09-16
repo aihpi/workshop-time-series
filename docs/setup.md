@@ -1,7 +1,7 @@
 # Setting up
 
 The full walkthrough, with screenshots and the VS Code specifics, is in
-[`notebooks/00_Practical_Introduction.ipynb`](https://github.com/aihpi/kisz-time-series/blob/main/notebooks/00_Practical_Introduction.ipynb).
+[`notebooks/00_Practical_Introduction.ipynb`](https://github.com/aihpi/workshop-time-series/blob/main/notebooks/00_Practical_Introduction.ipynb).
 This page is the short version, for checking an installation or getting moving quickly.
 
 ## What you need
@@ -13,8 +13,8 @@ This page is the short version, for checking an installation or getting moving q
 ## Install
 
 ```bash
-git clone https://github.com/aihpi/kisz-time-series.git
-cd kisz-time-series
+git clone https://github.com/aihpi/workshop-time-series.git
+cd workshop-time-series
 uv sync
 ```
 

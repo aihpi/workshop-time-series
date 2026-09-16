@@ -41,7 +41,7 @@ release = next(
 )
 version = release
 
-REPO_URL = "https://github.com/aihpi/kisz-time-series"
+REPO_URL = "https://github.com/aihpi/workshop-time-series"
 REPO_BLOB = f"{REPO_URL}/blob/main"
 
 # ── Extensions ───────────────────────────────────────────────────────────────
